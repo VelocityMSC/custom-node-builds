@@ -1,11 +1,5 @@
-# Node.js 12+ binaries for CentOS 6
+# Custom Node.js binaries for CentOS 6 and 7
 
-The official Node.js Linux x64 binaries don't support CentOS 6 and earlier; they're now built on CentOS 7 and depend on a more recent glibc.
+Builds Node.js without exporting OpenSSL symbols to ensure they don't clash with the system copy of OpenSSL in dynamically loaded libraries. Also adds needed build flags to build version 10+ on CentOS 6.
 
-More details here: https://github.com/nodejs/node/issues/30077
-
-We can successfully compile on CentOS 6 by using `scl enable python27 devtoolset-7` and setting `CPPFLAGS=-D__STDC_FORMAT_MACROS` and `LDFLAGS=-lrt`.
-
-This repository semi-automates these builds using GitHub Actions, and publishes the resulting binaries as attachments to [releases](https://github.com/jcheng5/node-centos6/releases).
-
-As currently written, new builds are created by editing the `NODE_VERSION` value in `.github/workflows/ci.yml`, and pushing that change to the master branch. If a release of that version doesn't already exist, then a build and publish will be attempted. (In the future, it would be nice if this workflow ran on a scheduled basis and just built whatever new Node.js it found.)
+When a change to `NODE_VERSION` in `.github/workflows/ci.yml` is pushed new builds will be made automatically and added to the project releases.

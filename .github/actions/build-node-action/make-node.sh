@@ -16,7 +16,7 @@ cd ${NODE_DIR}
 # These flags are required for CentOS 6, and are the whole
 # reason for doing our own builds
 export CPPFLAGS=-D__STDC_FORMAT_MACROS
-export LDFLAGS=-lrt
+export LDFLAGS="-lrt -Wl,--exclude-libs,libopenssl.a"
 
 scl enable devtoolset-7 python27 ./configure
 scl enable devtoolset-7 python27 "ARCH=x64 make -j$(nproc) binary"
